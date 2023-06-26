@@ -1,52 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Newsletter sign-up form with success message</title>
+    <title>
+      Frontend Mentor | Newsletter sign-up form with success message
+    </title>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
-</head>
-<body>
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <link rel="stylesheet" href="utilities.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body
+    class="align-items-center d-flex flex-column justify-content-between justify-content-center justify-content-sm-evenly vh-100"
+  >
+    <!-- Sign-up form start -->
+    <div class="shadow-lg bg-light rounded-5">
+      <div class="d-md-none shadow-lg">
+        <img
+          src="./assets/images/illustration-sign-up-mobile.svg"
+          class="w-100"
+          alt="illustration-sign-up-mobile"
+          srcset=""
+        />
+      </div>
+      <div class="align-items-center d-flex justify-content-around p-md-4 pb-4">
+        <div class="my-auto px-4 px-lg-5 px-md-3 w-100">
+          <h1 class="mb-4 mt-4 mt-md-0 form-title">Stay updated!</h1>
 
-  <!-- Sign-up form start -->
+          <p>Join 60,000+ product managers receiving monthly updates on:</p>
 
-  Stay updated!
+          <ul class="mb-4 ps-0">
+            <li>Product discovery and building what matters</li>
+            <li>Measuring to ensure updates are a success</li>
+            <li>And much more!</li>
+          </ul>
 
-  Join 60,000+ product managers receiving monthly updates on:
+          <form action="">
+            <div class="d-flex justify-content-between">
+              <label class="d-block fw-bold mb-2" for="email">
+                Email address
+              </label>
+              <p class="mb-2 d-none invalid-message" id="validation-message">
+                Valid email required
+              </p>
+            </div>
+            <input
+              id="emailInput"
+              type="text"
+              name="email"
+              oninput="debouncedValidateEmail(this)"
+              onblur="validateEmail(this)"
+              class="border mb-4 px-4 py-3 rounded-3 w-100"
+              placeholder="email@company.com"
+            />
+            <button
+              type="button"
+              class="border-0 p-3 rounded-3 text-white w-100"
+              onclick="showModal()"
+            >
+              Subscribe to monthly newsletter
+              <div class="spinner"></div>
+            </button>
+          </form>
+        </div>
 
-  Product discovery and building what matters
-  Measuring to ensure updates are a success
-  And much more!
+        <div class="d-md-block d-none">
+          <img
+            src="./assets/images/illustration-sign-up-desktop.svg"
+            alt="illustration-sign-up-desktop"
+            srcset=""
+          />
+        </div>
+      </div>
+    </div>
+    <!-- Sign-up form end -->
 
-  Email address
-  email@company.com
+    <div class="attribution bg-light py-2 px-5 rounded-4 shadow-lg">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">
+        Frontend Mentor </a
+      >. Coded by
+      <a href="https://www.linkedin.com/in/mohamed-hesham1511/">
+        Mohamed Hesham </a
+      >.
+    </div>
 
-  Subscribe to monthly newsletter
+    <!-- Success message start -->
+    <div
+      class="bg-light d-flex d-xl-block flex-column justify-content-between justify-content-md-around modal-card position-absolute hide-modal"
+      id="modal-card"
+    >
+      <div class="mt-5 mt-md-0">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="64"
+          height="64"
+          viewBox="0 0 64 64"
+        >
+          <defs>
+            <linearGradient id="a" x1="100%" x2="0%" y1="0%" y2="100%">
+              <stop offset="0%" stop-color="#FF6A3A" />
+              <stop offset="100%" stop-color="#FF527B" />
+            </linearGradient>
+          </defs>
+          <g fill="none">
+            <circle cx="32" cy="32" r="32" fill="url(#a)" />
+            <path
+              stroke="#FFF"
+              stroke-width="4"
+              d="m18.286 34.686 8.334 7.98 19.094-18.285"
+            />
+          </g>
+        </svg>
+        <h1 class="mt-5 mb-0">Thanks for subscribing!</h1>
 
-  <!-- Sign-up form end -->
+        <p class="mb-5 mb-md-0 mt-4">
+          A confirmation email has been sent to
+          <span class="fw-bold" id="email">ash@loremcompany.com.</span> Please
+          open it and click the button inside to confirm your subscription.
+        </p>
+      </div>
 
-  <!-- Success message start -->
+      <div>
+        <button
+          type="button"
+          class="border-0 px-3 py-3 rounded-3 text-white w-100"
+          onclick="hideModal()"
+        >
+          Dismiss message
+        </button>
+      </div>
+    </div>
+    <div
+      class="modal-background hide-modal"
+      id="modal-background"
+      onclick="hideModal()"
+    ></div>
+    <!-- Success message end -->
 
-  Thanks for subscribing!
-
-  A confirmation email has been sent to ash@loremcompany.com. 
-  Please open it and click the button inside to confirm your subscription.
-
-  Dismiss message
-
-  <!-- Success message end -->
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
-</body>
+    <script src="main.js"></script>
+  </body>
 </html>
